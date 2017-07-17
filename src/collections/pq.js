@@ -1,90 +1,93 @@
 'use strict';
 
-const Iterable = require('./iterable.js');
+const less = require('../util').less, 
+      swap = require('../util').swap;
 
 /**
- * `_items` should contains `priority` field
+ * Priority Queue constructor, implemented on simple js arrays. 
+ * Items placing at private `_items` fiels, which starts from
+ * [0] element and childred of the n-th item are located at
+ * the `[2n + 1]` and `[2n + 2]` index. 
+ * Each `item` at the `_items` array should contain `priority`
+ * field in order to implement `PrioritizedTask` interface.
+ * `PQ` contains the only one public method - `next()`, which
+ * returns the most prioritized item from collection.
+ *
+ * @param {Array} items - an array of tasks, which is not 
+ * required. The set of tasks may be provided from the js
+ * `arguments` object.
  */
- // TODO: make arguments retrieving from `arguments`
- // TODO: create interface for `Task` item
-function PQ(_items) {
-  this._items = _items || [];
+function PQ(items) { 
+  this._items = [];
+
+  let data;
+  if (!Array.isArray(items)) {
+    data = Array.prototype.slice.call(arguments);
+  } else {
+    // Do not modify initial array of items
+    data = Array.prototype.slice.call(items);
+  }
+
+  data.forEach((item, index) => { 
+    this._items.push(item);
+    this._up(index); 
+  }); 
+
   this._length = this._items.length;
-
-  if (this._length > 0) {
-    let parents = this._items.splice(-this._length / 2);
+} 
  
-    parents.forEach((item, index) => {
-      this._down(item, index);
-    });
-  }
-}
+PQ.prototype._up = function(index) { 
+  while (index > 0 && 
+         less(this._items, Math.ceil(index / 2) - 1, index)) { 
+    swap(this._items, Math.ceil(index / 2) - 1, index); 
+    index = Math.ceil(index / 2) - 1; 
+  } 
+} 
 
-PQ.prototype._up = function(item) {
-  while (item > 0 && this._less(item / 2, item)) {
-    this._swap(item / 2, item);
-    item /= 2;
-  }
-}
+PQ.prototype._down = function(curIdx) { 
+  while (curIdx * 2 + 1 < this._length) {
+    let curChildIdx = curIdx * 2 + 1;
 
-PQ.prototype._down = function(item) {
-  while (2 * item + 1 < this._length) {
-    let temp = 2 * item + 1;
+    if (curChildIdx < this._length - 1 && 
+        less(this._items, curChildIdx, curChildIdx + 1)) {
+      curChildIdx++; 
+    }
 
-    if (temp < this._length && this._less(temp, temp + 1))
-      temp++;
-    if (!this._less(k, j))
+    if (!less(this._items, curIdx, curChildIdx)) {
       break;
+    }
 
-    this._swap(item, temp);
-
-    item = temp;
+    swap(this._items, curIdx, curChildIdx);
+    curIdx = curChildIdx;
   }
 }
 
-/*                       Public section
-***********************************************************/
-
-/**
+/** 
  * Returns `null` if container is empty
- */
-PQ.prototype.pop = function() {
-  if (this._length === 0)
-    return null;
+ */ 
+PQ.prototype._pop = function() { 
+  if (this._length === 0) 
+    return null; 
+ 
+  let top = this._items[0]; 
+  swap(this._items, 0, --this._length);
+ 
+  this._items.pop(); 
 
-  let top = this._items[0];
-  this._length--;
+  this._down(0); 
+ 
+  return top; 
+} 
 
-  if (this._length < 0) {
-    this._items[0] = this._items[this._items - 1];
-    this._down(0);
-  }
-
-  this._items.pop();
-
-  return top;
-}
-
-/*            Utils [TODO: move to outer package]
+/*                       Public section 
 ***********************************************************/
-
-PQ.prototype._less = function(first, second) {
-  return 
-    this._items[first].priority < this._items[second].priority;
+/**
+ * Returns and delete the most prioritized item. If inner
+ * `_items` array is empty, returns null.
+ *
+ * @returns {Object} top prioritized item
+ * @public
+ */
+PQ.prototype.next = function() {
+  return this._pop();
 }
-
-PQ.prototype._swap = function(first, second) {
-  let temp = this._items[first];
-  this._items[first] = this._items[second];
-  this._items[second] = temp;
-}
-
-PQ.prototype = Object.create(Iterable.prototype);
-PQ.prototype.constructor = PQ;
-
-let pq = new PQ([{data: 'sdasd', priority: 1},
-  {data: 'jhfsd', priority: 2},
-  {data: 'sdasd', priority: 4},
-  {data: 'iiii', priority: 0}]);
-
-console.log(pq.pop())
