@@ -81,6 +81,7 @@ PQ.prototype._pop = function() {
 
 /*                       Public section 
 ***********************************************************/
+
 /**
  * Returns and delete the most prioritized item. If inner
  * `_items` array is empty, returns null.
@@ -91,3 +92,5 @@ PQ.prototype._pop = function() {
 PQ.prototype.next = function() {
   return this._pop();
 }
+
+module.exports = PQ;
