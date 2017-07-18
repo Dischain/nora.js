@@ -10,12 +10,13 @@ const less = require('../util').less,
  * the `[2n + 1]` and `[2n + 2]` index. 
  * Each `item` at the `_items` array should contain `priority`
  * field in order to implement `PrioritizedTask` interface.
- * `PQ` contains the only one public method - `next()`, which
- * returns the most prioritized item from collection.
+ *
+ * Implements <Iterable> interface to provide `next()` method.
  *
  * @param {Array} items - an array of tasks, which is not 
  * required. The set of tasks may be provided from the js
- * `arguments` object.
+ * `arguments` object. Type of `items` item is 
+ * `PrioritisedAsyncTask`
  */
 function PQ(items) { 
   this._items = [];

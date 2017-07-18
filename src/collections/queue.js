@@ -3,9 +3,11 @@
 /**
  * Priority Queue constructor, based on simple js arrays.
  *
+ * Implements <Iterable> interface to provide `next()` method.
+ *
  * @param {Array} items - an array of tasks, which is not 
  * required. The set of tasks may be provided from the js
- * `arguments` object.
+ * `arguments` object. Type of `items` item is `AsyncTask`
  */
 function Queue(items) {
   this._items = [];
@@ -32,7 +34,7 @@ Queue.prototype.next = function() {
   }
   else {
     -- this._length;
-    this._items.shift();
+    return this._items.shift();
   }
 }
 
