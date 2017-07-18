@@ -1,5 +1,7 @@
 'use strict';
 
+const AsyncTask = require('./asyncTask.js');
+
 /**
  * Async Task with `priotity`, which may invoke given `asyncFunc` 
  * function with given `args` and `userCallback`.

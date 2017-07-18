@@ -38,3 +38,5 @@ function AsyncPQ(tasks) {
 
   this._tasks = new PQ(items);
 }
+
+module.exports = AsyncQueue;
