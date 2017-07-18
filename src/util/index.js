@@ -14,7 +14,7 @@
  * @public
  */
 function less(arr, first, second) {
-  return (arr[first].priority < arr[second].priority); 
+  return (arr[first].getPriority() < arr[second].getPriority()); 
 }
 
 /**
