@@ -31,7 +31,39 @@ function swap(arr, first, second) {
   arr[second] = temp; 
 } 
 
+/*            Common utils section 
+***********************************************************/
+
+/**
+ * Return a deep copy of the given object.
+ *
+ * @param {Object} obj
+ * @public
+ */
+function deepCopy(obj) {
+  if (Array.isArray(obj)) {
+    var copy = [];
+    for (let i = 0; i < obj.length; i++) {
+      let value = obj[i];
+      copy[i] = (value !== null && typeof value === "object") ? 
+        deepCopy(value) : value;
+    }
+  } else {
+    var copy = {};
+
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        let value = obj[key];
+        copy[key] = (value !== null && typeof value === "object") ? 
+          deepCopy(value) : value;
+      }
+    }
+  }
+  return copy; 
+}
+
 module.exports = {
-	less: less,
-	swap: swap
+  less: less,
+  swap: swap,
+  deepCopy: deepCopy
 }

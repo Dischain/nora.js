@@ -3,7 +3,8 @@
 /**
  * Priority Queue constructor, based on simple js arrays.
  *
- * Implements <Iterable> interface to provide `next()` method.
+ * Implements <Iterable> interface to provide `next()`, `hasMore()`,
+ * `size()`, `forEach()` functions.
  *
  * @param {Array} items - an array of tasks, which is not 
  * required. The set of tasks may be provided from the js
@@ -36,6 +37,18 @@ Queue.prototype.next = function() {
     -- this._length;
     return this._items.shift();
   }
+}
+
+Queue.prototype.size = function() {
+  return this._length;
+}
+
+Queue.prototype.hasMore = function() {
+  return this._length > 0;
+}
+
+Queue.prototype.forEach = function(callback) {
+  this._items.forEach(callback);
 }
 
 module.exports = Queue;
