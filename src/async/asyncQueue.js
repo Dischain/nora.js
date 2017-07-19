@@ -1,7 +1,9 @@
 'use strict';
 
 const AsyncTask = require('../task/asyncTask.js'),
-      Queue     = require('../collections/queue.js');
+      Queue     = require('../collections/queue.js'),
+
+      AsyncRunner = require('./asyncRunner.js');
 
 /**
  * Must be used only for tasks without priotities. Converts
@@ -70,5 +72,8 @@ function AsyncQueue(recourses, additionalArgs, asyncFunc, cb) {
 
   this._tasks = new Queue(tasks);
 }
+
+AsyncQueue.prototype = Object.create(AsyncRunner.prototype);
+AsyncQueue.prototype.constructor = AsyncQueue;
 
 module.exports = AsyncQueue;

@@ -1,15 +1,17 @@
 'use strict';
 
 const PrioritisedAsyncTask = require('../task/prioritisedAsyncTask.js'),
-      PQ                   = require('../collections/pq.js');
+      PQ                   = require('../collections/pq.js'),
+
+      AsyncRunner = require('./asyncRunner.js');
 
 /**
  * Must be used only for tasks with priorities
  *
- * Extends <AsyncRunener>
+ * Extends <AsyncRunner>
  *
  * Example:
- * let paq = new AsyncPQ([
+ * let apq = new AsyncPQ([
  *   [ ['asyncQueue.js'], fs.readFile, (data) => console.log(data.toString()), 0],
  *   [ ['../collections/pq.js'], fs.readFile, (data) => console.log(data.toString()), 4],
  *   [ ['../collections'], fs.stat, (data) => console.log(data.toString()), 2],
@@ -36,7 +38,11 @@ function AsyncPQ(tasks) {
     throw new Error('Incompatible arguments at AsyncPQ');
   }
 
-  this._tasks = new PQ(items);
+  //this._tasks = new PQ(items);
+  AsyncRunner.call(this, new PQ(items))
 }
 
-module.exports = AsyncQueue;
+AsyncPQ.prototype = Object.create(AsyncRunner.prototype);
+AsyncPQ.prototype.constructor = AsyncPQ;
+
+module.exports = AsyncPQ;
