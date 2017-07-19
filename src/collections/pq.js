@@ -11,7 +11,8 @@ const less = require('../util').less,
  * Each `item` at the `_items` array should contain `priority`
  * field in order to implement `PrioritizedTask` interface.
  *
- * Implements <Iterable> interface to provide `next()` method.
+ * Implements <Iterable> interface to provide `next()`, `hasMore()`,
+ * `size()`, `forEach()` functions.
  *
  * @param {Array} items - an array of tasks, which is not 
  * required. The set of tasks may be provided from the js
@@ -92,6 +93,18 @@ PQ.prototype._pop = function() {
  */
 PQ.prototype.next = function() {
   return this._pop();
+}
+
+PQ.prototype.size = function() {
+  return this._length;
+}
+
+PQ.prototype.hasMore = function() {
+  return this._length > 0;
+}
+
+PQ.prototype.forEach = function(callback) {
+  this._items.forEach(callback);
 }
 
 module.exports = PQ;
