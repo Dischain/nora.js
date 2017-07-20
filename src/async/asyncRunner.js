@@ -2,7 +2,7 @@
 
 const ParallelLimited = require('../algorithm/parallelLimited.js'),
       Parallel        = require('../algorithm/parallel.js'),
-      Serial          = require('../algorithm/serial.js');
+      Series          = require('../algorithm/series.js');
 
 function AsyncRunner(container) {
   this._algorithm;
@@ -21,8 +21,8 @@ AsyncRunner.prototype.parallel = function() {
   return this;
 };
 
-AsyncRunner.prototype.serial = function() {
-  this._algorithm = new Serial(this._container);
+AsyncRunner.prototype.series = function() {
+  this._algorithm = new Series(this._container);
 
   return this;
 };

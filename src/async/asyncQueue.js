@@ -44,7 +44,7 @@ const AsyncTask = require('../task/asyncTask.js'),
  *
  */
 function AsyncQueue(recourses, additionalArgs, asyncFunc, cb) {
-  let tasks = [];
+  let items = [];
 
   // First case
   if (arguments.length > 1) {
@@ -52,7 +52,7 @@ function AsyncQueue(recourses, additionalArgs, asyncFunc, cb) {
       let args = [recourse]; 
           args = args.concat(additionalArgs);
       let asyncTask = new AsyncTask(args, asyncFunc, cb);
-      tasks.push(asyncTask);
+      items.push(asyncTask);
     });
   } 
   // Second case
@@ -64,13 +64,13 @@ function AsyncQueue(recourses, additionalArgs, asyncFunc, cb) {
 
           asyncTask = new AsyncTask(args, asyncFunc, userCallback);
 
-      tasks.push(asyncTask);
+      items.push(asyncTask);
     });
   } else {
     throw new Error('Incompatible arguments at AsyncQueue');
   }
 
-  this._tasks = new Queue(tasks);
+  AsyncRunner.call(this, new Queue(items))
 }
 
 AsyncQueue.prototype = Object.create(AsyncRunner.prototype);

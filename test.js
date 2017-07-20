@@ -1,12 +1,21 @@
 'use strict'
 
-//Test
+//Test PQ
 const AsyncPQ  = require('./src/async/asyncPQ.js'),
-	    readFile = require('fs').readFile;
+      AsyncQueue = require('./src/async/asyncQueue.js'),
+      readFile = require('fs').readFile;
 
-let apq = new AsyncPQ([
-	[ ['./src/algorithm/parallelLimited.js'], readFile, (data) => console.log(data.toString()), 0 ],
-	[ ['./src/algorithm/algorithm.js'], readFile, (data) => console.log(data.toString()), 5 ],
+let apq = new /*AsyncPQ*/AsyncQueue([
+  [ ['./test/test1'], readFile, (data) => console.log(data.toString()), 0 ],
+  [ ['./test/test2'], readFile, (data) => console.log(data.toString()), 5 ],
+  [ ['./test/test3'], readFile, (data) => console.log(data.toString()), 2 ]
 ]);
 
-apq.parallelLimited(2).run(() => { console.log('completed'); })
+//Parallel limited
+//apq.parallelLimited(2).run(() => { console.log('completed'); })
+
+//Parallel
+//apq.parallel().run(() => { console.log('completed parallel'); })
+
+//Series
+apq.series().run(() => { console.log('completed serial'); })

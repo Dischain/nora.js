@@ -38,7 +38,6 @@ function AsyncPQ(tasks) {
     throw new Error('Incompatible arguments at AsyncPQ');
   }
 
-  //this._tasks = new PQ(items);
   AsyncRunner.call(this, new PQ(items))
 }
 
