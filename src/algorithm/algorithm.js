@@ -8,8 +8,6 @@ function Algorithm(container) {
   this._stopped = false;
 
   this._container = container;
-  //this._container = deepCopy(container);
-  //this._copyContainer = deepCopy(container);
 }
 
 Algorithm.prototype.run = function(cb) {}
@@ -17,8 +15,6 @@ Algorithm.prototype.run = function(cb) {}
 Algorithm.prototype.pause = function(cb) {}
 
 Algorithm.prototype.stop = function(cb) {}
-
-Algorithm.prototype.restart = function() {}
 
 Algorithm.prototype.running = function() { return this._running; }
 

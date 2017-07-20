@@ -1,7 +1,6 @@
 'use strict';
 
-const Algorithm = require('./algorithm.js'),
-		  PQ        = require('../collections/pq.js');
+const Algorithm = require('./algorithm.js');
 
 /**
  * Extends <Algorithm>
@@ -22,12 +21,8 @@ ParallelLimited.prototype.constructor = ParallelLimited;
  */
 ParallelLimited.prototype.run = function(cb) {
   var running = 1,
-       //curTask = this._container.next();
-       //curTask,
        that = this;
   function next() {
-    console.log('has more: ' + that._container.hasMore() + 
-    	', running: ' + running + ' container length: ' + that._container._length)
     --running;
 
     if (!that._container.hasMore() && running === 0) {    	
@@ -37,9 +32,7 @@ ParallelLimited.prototype.run = function(cb) {
     while(running < that._limit && that._container.hasMore()) {
     	var curTask = that._container.next();
       (function (task) {
-      	console.log('running task ' + task._args[0])
-        //task.run(next);
-        task.run(function() { next(); });
+        task.run(next);
       })(curTask);
       running++;
     }
@@ -48,5 +41,3 @@ ParallelLimited.prototype.run = function(cb) {
 }
 
 module.exports = ParallelLimited;
-
-// TODO: think, where to place `_container` field!
