@@ -36,7 +36,7 @@ Parallel.prototype.run = function(cb) {
   
   this._container.forEach(function(item, index) {
     if (index === that._container.size() - 1) {
-      that.complete();
+      that._complete();
       item.run(cb);
     } else {
       item.run();

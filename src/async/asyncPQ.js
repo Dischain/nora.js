@@ -5,10 +5,22 @@ const PrioritisedAsyncTask = require('../task/prioritisedAsyncTask.js'),
 
       AsyncRunner = require('./asyncRunner.js');
 
+// Represents priority queue of asynchronouse tasks. 
+// Must be used only for tasks with priotities. Converts
+// arguments list to `PrioritisedAsyncTask`.
+// Extends <AsyncRunner>
+
 /**
- * Must be used only for tasks with priorities
+ * Constructor takes an array of tasks with priorities, structured by the
+ * next way:
  *
- * Extends <AsyncRunner>
+ * < { Array of { Array of arguments },
+ *              { Function } asynchronouse function, 
+ *              { Function } callback, 
+ *              { Number } priority } >
+ *
+ * So you provide an array of separate asynchronouse tasks with own priority
+ * and its callback. If `priority` is not defined, it should be set to 0.
  *
  * Example:
  * let apq = new AsyncPQ([
@@ -18,6 +30,7 @@ const PrioritisedAsyncTask = require('../task/prioritisedAsyncTask.js'),
  *   [ ['../collections'], fs.readdir, (data) => console.log(data.toString()), 12]
  * ]);
  *
+ * @constructor
  */
 function AsyncPQ(tasks) {
 	let items = [];
@@ -27,7 +40,7 @@ function AsyncPQ(tasks) {
       let args = task[0],
           asyncFunc = task[1],
           userCallback = task[2],
-          priority = task[3],
+          priority = task[3] || 0,
 
           asyncTask = 
           	new PrioritisedAsyncTask(args, asyncFunc, userCallback, priority);

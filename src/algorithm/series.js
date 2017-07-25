@@ -36,7 +36,7 @@ Series.prototype.run = function(cb) {
   function next() {
     let curTask = that._container.next();
     if (that._container.hasMore()) {
-      that.complete();
+      that._complete();
       curTask.run(next);
     } else {
       curTask.run(cb);
