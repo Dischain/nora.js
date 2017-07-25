@@ -5,20 +5,20 @@ const AsyncTask = require('../task/asyncTask.js'),
 
       AsyncRunner = require('./asyncRunner.js');
 
+// Represents simple queue of asynchronouse tasks. 
+// Must be used only for tasks without priotities. Converts
+// arguments list to `AsyncTask`.
+// Extends <AsyncRunner>
+ 
 /**
- * Must be used only for tasks without priotities. Converts
- * arguments list to `AsyncTask`.
- *
- * Extends <AsyncRunner>
- *
- * May take two types of arguments list:
- * 1). [ {Array} of {String} recourses, 
- *       {Array} of additional arguments,
- *       <Function> asynchronouse function,
- *       <Function> callback ]
- * 2). [ {Array} of {Array of arguments},
-                    {Function} asynchronouse function,
- *                  <Function> callback ]
+ * Constructor may take two types of arguments list:
+ * 1). < { Array of {String} recourses }, 
+ *       { Array of additional arguments },
+ *       { Function } asynchronouse function,
+ *       { Function } callback >
+ * 2). < { Array of { Array of arguments },
+ *                  { Function } asynchronouse function,
+ *                  { Function } callback } >
  *
  * In first case, you provide a set of recourses, for each of
  * the given async function should be invoked with additional
@@ -42,6 +42,7 @@ const AsyncTask = require('../task/asyncTask.js'),
  *   [ ['../collections'], fs.readDir, console.log]
  * ]);
  *
+ * @constructor
  */
 function AsyncQueue(recourses, additionalArgs, asyncFunc, cb) {
   let items = [];

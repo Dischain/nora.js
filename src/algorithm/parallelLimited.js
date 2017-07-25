@@ -43,7 +43,7 @@ ParallelLimited.prototype.run = function(cb) {
     --running;
 
     if (!that._container.hasMore() && running === 0) {  
-    	that.complete();  	
+    	that._complete();  	
       cb();
     }
 
