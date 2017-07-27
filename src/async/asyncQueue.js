@@ -51,7 +51,10 @@ function AsyncQueue(recourses, additionalArgs, asyncFunc, cb) {
   if (arguments.length > 1) {
     recourses.forEach((recourse) => {
       let args = [recourse]; 
-          args = args.concat(additionalArgs);
+
+      if (arguments.length === 4 && additionalArgs != null) {
+        args = args.concat(additionalArgs);
+      }
       let asyncTask = new AsyncTask(args, asyncFunc, cb);
       items.push(asyncTask);
     });
