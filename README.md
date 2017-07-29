@@ -19,6 +19,8 @@ myAsyncQueue
   .parallelLimited(2 /*tasks at time*/)
   .run(() => console.log('Complete!');
 ```
+Please, consider that this module written for learning purposes :)
+
 ## Contents:
 1. [Asynchronouse Queues](https://github.com/Dischain/nora.js#asynchronouse-queues)
 - [AsyncQueue](https://github.com/Dischain/nora.js#asyncqueue)
