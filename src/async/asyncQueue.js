@@ -30,6 +30,10 @@ const AsyncTask = require('../task/asyncTask.js'),
  * let aq = new AsyncQueue(['asyncQueue.js'], null, 
  *   require('fs').readFile, (data) => console.log(data.toString()));
  *
+ * NOTE: In this case, when you provide same async fnuction with
+ * same signature for different resources, it should complete
+ * one after other, but still in parallel.
+ *
  * In second case, you specify the same type of arguments, but
  * you can to provide absolutly different async functions with
  * different arguments etc. This set need to be wrapped into
