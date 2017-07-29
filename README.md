@@ -45,10 +45,10 @@ In this case, you specify only a one async function with additional paramaters a
 
 Example usage:
 ```javascript
- let aq = new AsyncQueue(['file1.dat', 'file2.dat', 'file3.dat'],                         // recourses
-						 'utf-8',                                 // additionalArgs
-						 require('fs').readFile,                  // asyncFunc
-						 (data) => console.log(data.toString())); // cb
+ let aq = new AsyncQueue(['file1.dat', 'file2.dat', 'file3.dat'], // recourses
+      'utf-8',                                  // additionalArgs
+      require('fs').readFile,                   // asyncFunc
+      (data) => console.log(data));             // cb
 ```
 At this example standart `node.js` `readFile` function applying to each path to file from array `['file.dat', 'file2.dat', 'file3.dat']` with additional argument `utf-8` as the file encoding and a callback, which converts a binary data to a simple string.
 
@@ -63,7 +63,7 @@ let aq = new AsyncQueue([
   [ 
     ['file.dat', 'utf-8'],                 // args
     fs.readFile,                           // asyncFunc
-    (data) => console.log(data.toString()) // cb
+    (data) => console.log(data) // cb
   ],
   // another tasks
   [ ['file.dat'], fs.stat, (stats) => console.log(stats.isFile())],
@@ -84,7 +84,7 @@ let apq = new AsyncQueue([
   [ 
     ['file.dat', 'utf-8'],                  // args
     fs.readFile,                            // asyncFunc
-    (data) => console.log(data.toString()), // cb
+    (data) => console.log(data), // cb
     3                                       // priority
   ],
   // another tasks
