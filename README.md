@@ -1,7 +1,7 @@
 
 # [nora.js](https://github.com/Dischain/nora.js)
 
-[nora.js](https://github.com/Dischain/nora.js) is a utility module which provides queues of async javascript tasks for working with asynchromouse JavaScript, designed for use with [Node.js](https://nodejs.org)
+[nora.js](https://github.com/Dischain/nora.js) is a utility module which provides queues of async javascript tasks for working with asynchromouse JavaScript, designed for use with [Node.js](https://nodejs.org) or in browser.
 
 `nora` package provides two public classes - `AsyncQueue` и `AsyncPQ`,  extended from common superclass `AsyncRunner`, which provides convenient selection method of necessary type of tasks execution (such as [series](https://github.com/Dischain/nora.js#series), [parallel](https://github.com/Dischain/nora.js#parallel), [parallel limited](https://github.com/Dischain/nora.js#parallel-limited)), `run` function for async functions execution and simple [predicates](https://github.com/Dischain/nora.js#predicates) as `running()` and `completed()`.
 
@@ -30,6 +30,7 @@ Please, consider that this module written for learning purposes :)
 - [Parallel](https://github.com/Dischain/nora.js#parallel)
 - [Parallel Limited](https://github.com/Dischain/nora.js#parallel-limited)
 3. [Predicates](https://github.com/Dischain/nora.js#predicates)
+4. [Build](https://github.com/Dischain/nora.js#build)
 
 
 
@@ -143,3 +144,6 @@ myAsyncQueue.parallel().run(() => {
 // ...long time ago
 console.log(myAsyncQueue.completed()); // 'true'
 ```
+
+## Build
+To build nora for browser env, simply run ```grunt``` from cli.

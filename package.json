@@ -17,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/Dischain/nora.js/issues"
   },
-  "homepage": "https://github.com/Dischain/nora.js#readme"
+  "homepage": "https://github.com/Dischain/nora.js#readme",
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "gulp": "^3.9.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
 }
