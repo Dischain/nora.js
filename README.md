@@ -19,6 +19,15 @@ myAsyncQueue
   .parallelLimited(2 /*tasks at time*/)
   .run(() => console.log('Complete!');
 ```
+
+Or for browser
+
+```html
+<script src="./nora.js"></script>
+<script type="text/javascript">
+  const AsyncQueue = nora.AsyncQueue;
+</script>
+```
 Please, consider that this module written for learning purposes :)
 
 ## Contents:
@@ -146,4 +155,4 @@ console.log(myAsyncQueue.completed()); // 'true'
 ```
 
 ## Build
-To build nora for browser env, simply run ```grunt``` from cli.
+To build nora for browser env, simply run ```npm run build``` from cli.
