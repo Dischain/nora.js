@@ -4,8 +4,10 @@ const AsyncPQ  = require('./src/async/asyncPQ.js'),
       AsyncQueue = require('./src/async/asyncQueue.js');
 
 if (window) {
-	window.AsyncPQ = AsyncPQ;
-	window.AsyncQueue = AsyncQueue;
+	window.nora = {
+		AsyncPQ: AsyncPQ,
+		AsyncQueue: AsyncQueue
+	};
 }
 
 module.exports = {
