@@ -5,10 +5,10 @@ const gulp       = require('gulp'),
       babelify   = require('babelify'),
       source     = require('vinyl-source-stream');
 
-gulp.task('default', () => {
+gulp.task('scripts-browserify', () => {
   return browserify('./index.js')
          .transform(babelify)
          .bundle()
-         .pipe(source('./nora.min.js'))
+         .pipe(source('./nora.js'))
          .pipe(gulp.dest('./'));
 });

@@ -18,6 +18,9 @@
     "url": "https://github.com/Dischain/nora.js/issues"
   },
   "homepage": "https://github.com/Dischain/nora.js#readme",
+  "scripts": {
+    "build": "gulp scripts-browserify"
+  },
   "devDependencies": {
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
